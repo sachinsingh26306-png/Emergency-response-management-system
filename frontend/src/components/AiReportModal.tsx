@@ -64,34 +64,7 @@ export const AiReportModal: React.FC<AiReportModalProps> = ({
       if (res.success && res.aiAnalysis) {
         setAnalysis(res.aiAnalysis);
       } else {
-        // Fallback local analysis
-        const isFire = /fire|flame|smoke|burn/i.test(description);
-        const isMedical = /injury|casualt|heart|bleed|trauma|clinic/i.test(description);
-        const isCrime = /robbery|gun|weapon|assault|theft/i.test(description);
-        const isHazmat = /chemical|toxic|gas|spill|leak/i.test(description);
-        const isFlood = /flood|water|submerged|river/i.test(description);
-
-        const type = isFire ? 'Fire' : isMedical ? 'Medical' : isCrime ? 'Crime' : isHazmat ? 'Hazmat' : isFlood ? 'Flood' : 'Other';
-        const severity = isFire || isHazmat ? 9 : isMedical ? 8 : 6;
-        const peopleAffected = description.match(/\d+/) ? parseInt(description.match(/\d+/)![0]) : 4;
-
-        let gridX = 2, gridY = 2;
-        if (isHazmat) { gridX = 5; gridY = 7; }
-        else if (isMedical) { gridX = 7; gridY = 3; }
-        else if (isFlood) { gridX = 8; gridY = 4; }
-
-        setAnalysis({
-          type,
-          severity,
-          peopleAffected,
-          location: isFire ? 'Block C Industrial' : isHazmat ? 'North Highway' : 'Downtown Plaza',
-          gridX,
-          gridY,
-          traffic: 'High',
-          summary: 'Local fallback parser used.',
-          urgency: severity >= 8 ? 'Critical' : 'High',
-          fallback: true,
-        });
+        setError(res.error || 'AI Analysis failed on the backend.');
       }
     } catch (err: any) {
       setError(err.message || 'Failed to submit report');
@@ -101,8 +74,11 @@ export const AiReportModal: React.FC<AiReportModalProps> = ({
   };
 
   const handleConfirm = async () => {
+    if (loading) return;
     try {
       setLoading(true);
+      setError(null);
+      
       let payload;
       if (mode === 'ai' && analysis) {
         payload = {
@@ -134,6 +110,7 @@ export const AiReportModal: React.FC<AiReportModalProps> = ({
       onClose();
     } catch (err: any) {
       setError(err.message || 'Failed to create emergency');
+    } finally {
       setLoading(false);
     }
   };

@@ -90,7 +90,7 @@ export const reportEmergencyManual = async (payload: {
 
 export const reportEmergencyAI = async (
   description: string
-): Promise<{ success: boolean; aiAnalysis?: any; error?: string }> => {
+): Promise<{ success: boolean; aiAnalysis?: any; error?: string; errorType?: string }> => {
   const res = await fetch(`${API_URL}/emergencies/ai/analyze`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -98,7 +98,7 @@ export const reportEmergencyAI = async (
   });
   const data = await res.json();
   if (!res.ok || !data.success) {
-    return { success: false, error: data.error || `HTTP ${res.status}` };
+    return { success: false, error: data.error || `HTTP ${res.status}`, errorType: data.errorType };
   }
   return data;
 };

@@ -22,6 +22,7 @@ struct AIAnalysis {
     
     bool success;            // True if API call and parsing succeeded
     string errorMessage;     // Populated if success is false
+    string errorType;        // Error category (e.g. QUOTA_EXHAUSTED, RATE_LIMIT, SERVICE_UNAVAILABLE, AUTH_ERROR, INVALID_REQUEST)
 };
 
 // Sends the natural language description to Gemini and returns parsed data

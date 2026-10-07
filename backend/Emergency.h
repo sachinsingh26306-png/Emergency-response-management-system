@@ -135,13 +135,8 @@ int findNearestUnit(const string& unitType, pair<int,int> emergencyPos);
 // --- EmergencyEngine.cpp ---
 void initializeSystem();
 void showBanner();
-void showMenu();
-void reportEmergency();
-void dispatchNextEmergency();
-void simulateDispatch(int unitIdx, pair<int,int> target);
-void resolveEmergency();
-void searchEmergency();
-void sortEmergencies();
-void runEngine();
+bool engineDispatchNext(Emergency& eOut, ResponseUnit& uOut, int& distOut, string& errOut);
+int engineSimulateStep();
+bool engineResolveEmergency(int id, Emergency& eOut, ResponseUnit& uOut, string& errOut);
 
 #endif
