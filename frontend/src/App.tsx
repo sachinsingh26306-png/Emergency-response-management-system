@@ -17,7 +17,7 @@ import PriorityQueue from './components/PriorityQueue';
 import ResponseFleet from './components/ResponseFleet';
 import EngineTelemetry from './components/EngineTelemetry';
 import ActivityStream from './components/ActivityStream';
-import AiReportModal from './components/AiReportModal';
+import ReportEmergencyModal from './components/ReportEmergencyModal';
 
 export function App() {
   const [state, setState] = useState<DashboardState | null>(null);
@@ -288,7 +288,7 @@ export function App() {
       </footer>
 
       {/* Report modal */}
-      <AiReportModal
+      <ReportEmergencyModal
         isOpen={reportModalOpen}
         onClose={() => setReportModalOpen(false)}
         onSuccess={handleNewEmergencyReported}

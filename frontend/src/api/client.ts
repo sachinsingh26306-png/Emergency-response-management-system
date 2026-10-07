@@ -88,20 +88,6 @@ export const reportEmergencyManual = async (payload: {
   return data;
 };
 
-export const reportEmergencyAI = async (
-  description: string
-): Promise<{ success: boolean; aiAnalysis?: any; error?: string; errorType?: string }> => {
-  const res = await fetch(`${API_URL}/emergencies/ai/analyze`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ description }),
-  });
-  const data = await res.json();
-  if (!res.ok || !data.success) {
-    return { success: false, error: data.error || `HTTP ${res.status}`, errorType: data.errorType };
-  }
-  return data;
-};
 
 export const dispatchNext = async (): Promise<{
   success: boolean;

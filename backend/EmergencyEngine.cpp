@@ -2,7 +2,6 @@
 // Core engine logic.
 
 #include "Emergency.h"
-#include "GeminiAPI.h"
 
 void showBanner() {
     cout << "\n  ================================================================\n";

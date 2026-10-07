@@ -1,8 +1,34 @@
+# Dependencies
 node_modules/
+frontend/node_modules/
+
+# Compiled Binaries & Build Output
 *.exe
 *.o
 *.obj
 build/
 dist/
+frontend/dist/
+
+# Environment and Secrets
 .env
+*.env
+*.env.*
+backend/.env
+frontend/.env
+
+# Temporary and Cache files
+*.log
+__pycache__/
+*.pyc
+.cache/
+compile_commands.json
+
+# OS and Editor files
 .DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~

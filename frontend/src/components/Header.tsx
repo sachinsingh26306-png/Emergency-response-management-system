@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
           Emergency Response
         </h1>
         <p className="text-[13px] text-[var(--color-text-tertiary)] leading-tight">
-          AI-assisted emergency coordination
+          Emergency coordination
         </p>
       </div>
 
